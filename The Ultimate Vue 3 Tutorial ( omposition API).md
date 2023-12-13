@@ -1,0 +1,224 @@
+# VueCounterAPP
+## 创建 vue 应用
+```shell
+npm create vue@latest
+
+
+  cd CounterApp
+  npm install
+  npm run dev
+```
+
+## APP.vue
+```html
+<template>
+  <main>
+    <div class="counter">
+      <h4>The current count is...</h4>
+      <h1>{{ count }}</h1>
+      <button @click="count--">-</button>
+      <button @click="count++">+</button>
+    </div>
+  </main>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+const count = ref(0);//定义state变量
+</script>
+
+<style scoped>
+<style>
+```
+**几个要点**:
+- `<template>`
+- `<script setup>`
+- `@click="count--"` , `count--` 相当于一个函数执行
+- `<script setup>`:Vue.js 单文件组件（SFC）中的一部分，用于在组件中使用局部样式。这样做的目的是将样式限定在组件范围内，避免全局样式污染。
+
+# Vue 基础
+## 获取变量
+`{{varaible}}`
+## 事件处理
+`@click=""`
+## 定义状态变量
+`ref`
+```js
+<script setup>
+import { ref } from 'vue';
+const count = ref(0);
+const addCount = () => {
+  count.value++;
+};
+const subCount = () => {
+  count.value--;
+};
+</script>
+```
+# NotesAPP
+## HTML 和 CSS 设置
+- `flex-wrap`
+```css
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+```
+### 模态框的搭建
+```html
+
+<div class="overlay">
+  <div class="modal">
+	<textarea name="note" id="note" cols="20" rows="10"></textarea>
+	<button>Add Note</button>
+	<button class="close">Close</button>
+  </div>
+</div>
+
+<style scoped>
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.77);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal {
+  width: 500px;
+  background-color: wheat;
+  border-radius: 10px;
+  padding: 30px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+</style>
+```
+## 模态框的展示(条件渲染)
+### 功能实现
+点击 Add button 出现模态框
+#### v -if 和 v-show
+v-if 是“真实的”按条件渲染，因为它确保了在切换时，条件区块内的事件监听器和子组件都会被销毁与重建。
+v-if 也是惰性的：如果在初次渲染时条件值为 false，则不会做任何事。条件区块只有当条件首次变为 true 时才被渲染。
+相比之下，v-show 简单许多，元素无论初始条件如何，始终会被渲染，只有 CSS display 属性会被切换。
+总的来说，v-if 有更高的切换开销，而 v-show 有更高的初始渲染开销。因此，如果需要频繁切换，则使用 v-show 较好；如果在运行时绑定条件很少改变，则 v-if 会更合适。
+## 表单数据的存储/读取
+输入的表单数据传入变量
+```html
+<script setup>
+
+</script>
+
+<template>
+
+</template>
+```
+
+```html
+<script setup>
+const newNote = ref(' ');
+</script>
+
+<template>
+<textarea
+v-model="newNote"
+name="note"
+id="note"
+cols="20"
+rows="10"
+></textarea>
+</template>
+```
+### v-model
+## 事件处理:存储新的 Note 
+通过 addnote button 实现新的笔记数据的存储
+```html
+<script setup>
+const notes = ref([]);
+const addNote = () => {
+  notes.value.push({
+    id: Math.floor(Math.random() * 100000),
+    text: newNote.value,
+    data: new Date().toDateString(),
+    backgroundColor: generateRandomLightColor(),
+  });
+  showModal.value = false;
+  newNote.value = '';
+};
+</script>
+
+<template>
+<button @click="addNote()">Add Note</button>
+</template>
+```
+注意点:
+- 一般都是变量.value 赋值
+- data: `new Date().toDateString()`:生成最新时期和时间
+- 监听事件: `v-on:click="handler"` 或 `@click="handler"`。
+## v-for 渲染 note 数据对应的卡片
+
+```html
+<script setup>
+
+</script>
+
+<template>
+<div
+	  class="card"
+	  v-for="note in notes"
+	  :style="{ backgroundColor: note.backgroundColor }"
+>
+	  <p class="main-text">
+		{{ note.text }}
+	  </p>
+	  <p class="date">{{ note.date }}</p>
+</template>
+```
+### v-for(迭代生成内容)
+### : key(特殊 attribute)
+key 这个特殊的 attribute 主要作为 Vue 的虚拟 DOM 算法提示，在比较新旧节点列表时用于识别 vnode。
+在没有 key 的情况下，Vue 将使用一种最小化元素移动的算法，并尽可能地就地更新/复用相同类型的元素。如果传了 key，则将根据 key 的变化顺序来重新排列元素，并且将始终移除/销毁 key 已经不存在的元素。
+同一个父元素下的子元素必须具有唯一的 key。重复的 key 将会导致渲染异常。
+最常见的用例是与 v-for 结合：
+```html
+<div
+	class="card"
+	v-for="note in notes"
+	:key="note.id"
+	:style="{ backgroundColor: note.backgroundColor }"
+>
+```
+> [!important] 重要性
+>体现在删除数组中的某个元素
+### :style(绑定内联样式)
+## 错误提示
+```html
+<script setup>
+const errorMessage = ref('');
+const addNote = () => {
+  if (newNote.value.trim().length < 10) {//
+    toast.info('Note needs to be characters or more');//
+    return (errorMessage.value = 'Note needs to be characters or more');//
+  }
+  notes.value.push({
+    id: Math.floor(Math.random() * 100000),
+    text: newNote.value,
+    date: new Date().toDateString('en-US'),
+    backgroundColor: generateRandomLightColor(),
+  });
+  showModal.value = false;
+  newNote.value = '';
+  errorMessage.value = '';
+};
+</script>
+
+<template>
+
+</template>
+```
+### 修正字符串前后的空格
+1. `newNote.value.trim()`
+2. `v-model.tirm=newNote`
