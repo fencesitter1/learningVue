@@ -234,6 +234,10 @@ const props=defineProps({
 ```js
 const props = defineProps(['foo'])
 ```
+
+> [!warning] 
+>defineProps 一定得加`[ ]`
+
 ## 例子:变量传入组件
 - APP.Vue 内
 ```html
@@ -492,7 +496,7 @@ const generateUniqueId = () => Math.floor(Math.random() * 100000);
 ### 案例说明
 1.子组件emit 定义一个事件名和变量,传入父组件
 2.父组件监听事件,并执行监听后的函数,事件对应的变量为监听函数的输入(所以这里 `newTransactionData` 换成 `i` 没什么区别)
-
+3. emit 提交的变量好像自动传入父组件定义的函数,**一定不要自己加参数**
 # 59 :30 - Deleting Transactions
 ## 实现
 - 子组件
