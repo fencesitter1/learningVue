@@ -1,6 +1,48 @@
+**Contents**
+
+1. [目录](#%E7%9B%AE%E5%BD%95)
+1. [3 :21 - Vue.Js Setup](#3-21---vuejs-setup)
+	1. [选择文件](#%E9%80%89%E6%8B%A9%E6%96%87%E4%BB%B6)
+	1. [9 :06 - Create Component Files & Templates](#9-06---create-component-files--templates)
+1. [12 :30 - Create and import Components](#12-30---create-and-import-components)
+	1. [如何使用自定义的组件内容 ?](#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84%E7%BB%84%E4%BB%B6%E5%86%85%E5%AE%B9-)
+	1. [实现悬浮才出现的删除按钮](#%E5%AE%9E%E7%8E%B0%E6%82%AC%E6%B5%AE%E6%89%8D%E5%87%BA%E7%8E%B0%E7%9A%84%E5%88%A0%E9%99%A4%E6%8C%89%E9%92%AE)
+	1. [html 的输入框](#html-%E7%9A%84%E8%BE%93%E5%85%A5%E6%A1%86)
+	1. [18 :50 - TransactionList Display](#18-50---transactionlist-display)
+		1. [定义数据](#%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE)
+		1. [循环读取和显示数据](#%E5%BE%AA%E7%8E%AF%E8%AF%BB%E5%8F%96%E5%92%8C%E6%98%BE%E7%A4%BA%E6%95%B0%E6%8D%AE)
+1. [28 :37 - Transactions in Global State](#28-37---transactions-in-global-state)
+1. [响应式状态](#%E5%93%8D%E5%BA%94%E5%BC%8F%E7%8A%B6%E6%80%81)
+	1. [ref](#ref)
+1. [30 :12 - Pass & Recieve Props (defineProps)](#30-12---pass--recieve-props-defineprops)
+	1. [defineProps](#defineprops)
+	1. [例子:变量传入组件](#%E4%BE%8B%E5%AD%90%E5%8F%98%E9%87%8F%E4%BC%A0%E5%85%A5%E7%BB%84%E4%BB%B6)
+1. [32 :30 - Balance Component & computed()](#32-30---balance-component--computed)
+	1. [代码](#%E4%BB%A3%E7%A0%81)
+	1. [computed()](#computed)
+1. [37 :21 - Income & Expenses Component](#37-21---income--expenses-component)
+	1. [props 传入多个属性](#props-%E4%BC%A0%E5%85%A5%E5%A4%9A%E4%B8%AA%E5%B1%9E%E6%80%A7)
+	1. [筛选大于0的部分](#%E7%AD%9B%E9%80%89%E5%A4%A7%E4%BA%8E0%E7%9A%84%E9%83%A8%E5%88%86)
+1. [42 :34 - AddTransaction Form Component](#42-34---addtransaction-form-component)
+	1. [表单提交监听](#%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4%E7%9B%91%E5%90%AC)
+1. [44 :58 - Binding Form Inputs](#44-58---binding-form-inputs)
+	1. [具体实现](#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0)
+	1. [监听输入 v-model](#%E7%9B%91%E5%90%AC%E8%BE%93%E5%85%A5-v-model)
+1. [46 :41 - Validation & Toasts](#46-41---validation--toasts)
+	1. [vue-toastification](#vue-toastification)
+		1. [使用](#%E4%BD%BF%E7%94%A8)
+		1. [提示设置](#%E6%8F%90%E7%A4%BA%E8%AE%BE%E7%BD%AE)
+1. [52 :05 - Emit Custom Events (defineEmits)](#52-05---emit-custom-events-defineemits)
+	1. [Emit](#emit)
+1. [54 :45 - Add Transaction to State](#54-45---add-transaction-to-state)
+	1. [案例 :emit+监听](#%E6%A1%88%E4%BE%8B-emit%E7%9B%91%E5%90%AC)
+		1. [案例说明](#%E6%A1%88%E4%BE%8B%E8%AF%B4%E6%98%8E)
+1. [59 :30 - Deleting Transactions](#59-30---deleting-transactions)
+	1. [实现](#%E5%AE%9E%E7%8E%B0)
+1. [Fetch From Local Storage & OnMounted() &Save to Local Storage](#fetch-from-local-storage--onmounted-save-to-local-storage)
+
 # 目录
-```toc
-```
+
 Timestamps: 
 0:00 - Intro & Demo
 # 3 :21 - Vue.Js Setup
